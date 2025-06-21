@@ -3,7 +3,7 @@
 
 backend:
   name: git-gateway
-  branch: main # Or master, or whichever branch you deploy from
+  branch: master # Or master, or whichever branch you deploy from
 
 # The media_folder and public_folder are not strictly required for editing
 # conf.yml, but are good practice to include for managing icons.
