@@ -1,0 +1,128 @@
+# Netlify CMS Configuration for Dashy
+# Located at: /public/admin/config.yml
+
+backend:
+  name: git-gateway
+  branch: main # Or master, or whichever branch you deploy from
+
+# The media_folder and public_folder are not strictly required for editing
+# conf.yml, but are good practice to include for managing icons.
+media_folder: "public/item-icons" # Path where media will be stored
+public_folder: "/item-icons" # The src attribute for the media will be /item-icons/filename
+
+# This is the main configuration for your editable content.
+collections:
+  - name: "dashy_config" # Used in routes, e.g., /admin/#/collections/dashy_config
+    label: "Dashy Configuration" # Used in the UI
+    delete: false # Do not allow users to delete the conf.yml file
+    editor:
+      preview: false
+    files:
+      - name: "config"
+        label: "Main Config"
+        file: "public/conf.yml"
+        fields:
+          - {
+              label: "Page Title",
+              name: "pageInfo",
+              widget: "object",
+              fields:
+                [
+                  {
+                    label: "Title",
+                    name: "title",
+                    widget: "string",
+                    default: "Dashy",
+                  },
+                  {
+                    label: "Description",
+                    name: "description",
+                    widget: "string",
+                    required: false,
+                  },
+                  {
+                    label: "Nav Bar Title",
+                    name: "navLinks",
+                    widget: "list",
+                    required: false,
+                    fields:
+                      [
+                        { label: "Title", name: "title", widget: "string" },
+                        { label: "Path", name: "path", widget: "string" },
+                      ],
+                  },
+                ],
+            }
+          - {
+              label: "App Config",
+              name: "appConfig",
+              widget: "object",
+              fields:
+                [
+                  {
+                    label: "Theme",
+                    name: "theme",
+                    widget: "string",
+                    default: "default",
+                  },
+                  {
+                    label: "Layout",
+                    name: "layout",
+                    widget: "select",
+                    options: ["horizontal", "vertical", "grid"],
+                    default: "horizontal",
+                  },
+                  {
+                    label: "Icon Size",
+                    name: "iconSize",
+                    widget: "select",
+                    options: ["small", "medium", "large"],
+                    default: "medium",
+                  },
+                ],
+            }
+          - label: "Sections"
+            name: "sections"
+            widget: "list"
+            fields:
+              - { label: "Section Name", name: "name", widget: "string" }
+              - {
+                  label: "Section Icon",
+                  name: "icon",
+                  widget: "string",
+                  required: false,
+                  hint: "E.g., 'fas fa-rocket'",
+                }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+                  - {
+                      label: "Description",
+                      name: "description",
+                      widget: "string",
+                      required: false,
+                    }
+                  - {
+                      label: "Icon",
+                      name: "icon",
+                      widget: "string",
+                      required: false,
+                      hint: "Path to icon, e.g. /item-icons/my-icon.png",
+                    }
+                  - {
+                      label: "Open In",
+                      name: "target",
+                      widget: "select",
+                      options: ["newtab", "sametab", "modal"],
+                      required: false,
+                    }
+                  - {
+                      label: "Status Check",
+                      name: "statusCheck",
+                      widget: "boolean",
+                      default: false,
+                      required: false,
+                    }
